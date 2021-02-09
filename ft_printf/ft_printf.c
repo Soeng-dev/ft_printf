@@ -18,41 +18,64 @@
 #define FALSE 0
 
 // make this functions extensible for bonus
-int		print_data(const char **fmtspec, va_list param)
+int		cvt_spec(const char **spec, va_list param)
 {
 	int		prtlen;
-	char	is_converted;
 
 	prtlen = 0;
-	is_converted = FALSE;
-	while (!is_converted)
+	while (**(++spec))
 	{
-		if (**fmtspec == c)
-		{
-			ft_putchar(
+		if (**spec == )
+		{//record the spec in var
 		}
+		else if (**spec == )
+		{//record the spec in var
+		}
+		else if (**spec == )
+		{//record the spec in var
+		}
+		else if (**spec == )
+		{//record the spec in var
+		}
+		else
+			break;//break loop when meet char is not flag)
 	}
-	if (!is_specified)
+	//print data with pecified conversion
+	//may need to divide into function prt_data
+	if (**spec == )
+	{
+		va_arg
+		put*(); //need to get prt len also
+	}
+	else if (**spec == )
+	{
+		va_arg
+		put*(); //need to get prt len also
+	}
+	else if (**spec == )
+	{
+		va_arg
+		put*(); //need to get prt len also
+	}
+	else
+		while(**(--spec) != '%')
 	return (prtlen);
 }
 
 int		ft_printf(const char *format, ...)
 {
 	int		prtlen;
-	va_list	param;
+	va_list		param;
 
 	prtlen = 0;
 	va_start(param, ft_strlen(format));
 	while (*format)
-	{
-		while (*format && *format != '%')
-		{
-			write(1, format, 1);
-			++format;
-			++prtlen;
-		}
+	{	
 		if (*format == '%')
-			print_data(&format, param);
-
+			prtlen += (print_data(&format, param));
+		write(1, format, 1);
+		++format;
+		++prtlen;
 	}
+	return (prtlen);
 }
