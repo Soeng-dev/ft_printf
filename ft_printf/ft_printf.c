@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/09 17:35:11 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/09 17:40:46 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,7 @@
 
 #define TRUE 1
 #define FALSE 0
-/*
-int		is_specifier(char c)
-{
-	if (c == 'c' || c == 's' || c == 'p' || c == 'i' 
-		|| c == 'u' || c == 'x' || c == 'X')
-		return (CONVERSION);
-	else if (c == '-' || c == '0' || c == '.' || c == '*')
-		return (FLAG);
-	else
-		return (NON);
-}*/
+
 // make this functions extensible for bonus
 int		print_data(const char **fmtspec, va_list param)
 {
