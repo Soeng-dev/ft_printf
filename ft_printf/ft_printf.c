@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/09 15:20:41 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/09 16:19:23 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <unistd.h>
 #include "./libft/libft.h"
 
-int print_data(const char *fmtspec)
+// make this functions extensible for bonus
+int print_data(const char **fmtspec)
 {
+	int 
 
 
 
@@ -36,9 +38,7 @@ int ft_printf(const char *format, ...)
 			++outputlen;
 		}
 		if (*format == '%')
-		{
-			
-		}
+			print_data(&format);
 
 	}
 }
