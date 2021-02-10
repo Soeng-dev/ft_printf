@@ -62,8 +62,6 @@ int			ft_atoi(const char *str)
 		sign = (*str == '-') ? (-1) : (1);
 		str++;
 	}
-	while (str[numlen] >= '0' && str[numlen] <= '9')
-		ret = 10 * ret + ((int)(str[numlen++]) - '0');
 	if (sign > 0)
 	{
 		if (is_longint_overflow(str, numlen))
@@ -72,5 +70,7 @@ int			ft_atoi(const char *str)
 	else if (sign < 0)
 		if (is_longint_underflow(str, numlen))
 			return (0);
+	while (str[numlen] >= '0' && str[numlen] <= '9')
+		ret = 10 * ret + ((int)(str[numlen++]) - '0');
 	return (sign * ret);
 }

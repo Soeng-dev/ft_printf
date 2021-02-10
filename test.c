@@ -1,8 +1,7 @@
 #include <stdio.h>
 int main()
 {
-	int k[2] = {0xff,13};
+	int k[] = {4,5,6};
 	
-	int n = printf("%hhhki\n",k[0]);
-	printf("%d",n);
+	int n = printf("%h*d\n",k[1],*k);
 }
