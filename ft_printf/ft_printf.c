@@ -32,11 +32,6 @@ typedef struct s_tag
 	int		zero_flag;
 	long int	precision;
 	long int	width;
-
-	aligned = RIGHT;
-	precision = 0;
-	width = 0;
-	zero_flag = FALSE; 
 } t_tag;
 // make this functions extensible for bonus
 int		cvt_spec(const char **spec, va_list param)
@@ -45,6 +40,7 @@ int		cvt_spec(const char **spec, va_list param)
 	t_tag		tag;
 
 	prtlen = 0;
+	ft_memset(tag, 0, sizeof(tag));
 	//-0.*
 	//consider flag priority here
 	while (**(++spec))
@@ -102,74 +98,84 @@ int		cvt_spec(const char **spec, va_list param)
 	}
 	return (prtlen);
 }
-//print int number consider zero flag, preicision 
-int get_intnumlen(long long int num, t_tag tag)
+//get length of integer consider tag
+int get_numlen(int digitlen, int sign, t_tag tag)
 {
 	int	numlen;
 
+	numlen = digitlen;
+	numlen = MAX(tag.width, numlen);
+	numlen = MAX(tag.precision, numlen);
+	if (sign < 0)
+		++numlen;
 	return (numlen);
 }
-//tag 고려해 숫자길이 계산후 width,precision관련한 출력
-//zeroflag == 1, else 
+
 int		prt_int(va_list param, t_tag tag)
 {
-	int		i;
+	long long int	i;
 	long long int	temp;
 	int		prtlen;
 	int		numlen;
 	int		digitlen;
 
-	i = va_arg(param, int);
+	i = (long long int)va_arg(param, int);
 	temp = (long long int)((i < 0) ? -i : i);
 	digitlen = 1;
 	while ((temp /= 10) > 0)
 		++digitlen;
-	//need to fix putnbr param to long long int
-	numlen = get_intnumlen((long long int)i, tag);
+	numlen = get_numlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	prtlen = 0;
+	//from here print starts
+	//first condition states print before significant digit numbers 
 	if (tag.aligned == RIGHT)
 	{
-		while (prtlen < tag.width - numlen)
+		if (tag.zero_flag == TRUE)
 		{
-			write(1, " ", 1);
-			++prtlen;
-		}
+			if (i < 0)
+ 	 		{
+  				write(1, "-", 1);
+				++prtlen;
+	  		}
+  			while (prtlen < tag.width - digitlen)
+  			{
+  				write(1, "0", 1);
+  				++prtlen;
+  			}
+  		}
+  		else
+  		{
+  			while (prtlen < tag.width - numlen)
+  			{
+  				write(1, " ", 1);
+  				++prtlen;
+  			}
+  		}
 	}
-	//from here print starts
-	//first condition states print before numbers when i >= 0,
-	//prints before significant digit numbers i < 0
-	if (zero_flag == TRUE)
+	if (i < 0 && tag.zero_flag == FALSE)
 	{
-		if (i < 0)
-		{
-			write(1, "-", 1);
-			++prtlen;
-		}
-		while (prtlen < tag.width - digitlen)
-		{
-			write(1, "0", 1);
-			++prtlen;
-		}
+		write(1, "-", 1);
+		++prtlen;
 	}
-	else
+	//prints significant digit numbers
+	temp = -1;
+	while (++temp < tag.precision - digitlen)
 	{
-		while (prtlen < tag.width - numlen)
-		{
-			write(1, " ", 1);
-			++prtlen;
-		}
+		write(1, "0", 1);
+		++prtlen;
 	}
-	//prints significant digit
-	
+	temp = (long long int)((i < 0) ? -i : i);
+	ft_putnbr_fd(temp, 1);
+	prtlen += digitlen;
 	if (tag.aligned == LEFT)
 	{
-		while (prtlen < tag.width - numlen)
+		while (prtlen < tag.width)
 		{
 			write(1, " ", 1);
 			++prtlen;
 		}
 	}
-	
+	return (prtlen);
 }
 
 int		ft_printf(const char *format, ...)
