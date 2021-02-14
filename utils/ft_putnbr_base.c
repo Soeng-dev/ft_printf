@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <soekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/11 03:04:43 by soekim            #+#    #+#             */
-/*   Updated: 2020/08/12 23:23:31 by soekim           ###   ########.fr       */
+/*   Created: 2020/08/11 03:38:51 by soekim            #+#    #+#             */
+/*   Updated: 2020/08/11 22:38:56 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_atoi(char *str)
-{
-	int ret;
-	int sign;
+#include "ft_putnbr_base.h"
 
-	sign = 1;
-	ret = 0;
-	while (*str == ' ' || (9 <= *str && *str <= 13))
-		str++;
-	while (*str == '+' || *str == '-')
+int		ft_putnbr_base(unsigned long long n, char *base, int base_size)
+{
+	int len;
+
+	if (n < (unsigned long long)base_size)
 	{
-		sign = (*str == '+') ? (sign) : (-sign);
-		str++;
+		write(1, base + n, 1);
+		return (1);
 	}
-	while ('0' <= *str && *str <= '9')
+	else
 	{
-		ret = 10 * ret + (*str - '0');
-		str++;
+		len = ft_putnbr_base(n / (unsigned long long)base_size, base, base_size);
+		n %= (unsigned long long)base_size;
+		write(1, base + n, 1);
+		return (len + 1);
 	}
-	return (sign * ret);
 }

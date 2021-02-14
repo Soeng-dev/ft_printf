@@ -21,13 +21,12 @@ int		prt_param(const char **spec, va_list param)
 	int		prtlen;
 	t_tag		tag;
 
-	prtlen = 0;
 	ft_memset((void*)&tag, 0, sizeof(tag));
 	tag.precision = UNSET;
 	//-0.*
 	while (*(++(*spec)))
 	{
-		if (**spec == '0')
+		if (**spec == '0' && tag.aligned == RIGHT)
 			tag.zero_flag = TRUE;
 		else if (ft_isdigit(**spec))
 		{
@@ -75,13 +74,16 @@ int		prt_param(const char **spec, va_list param)
 			prtlen = prt_int(param, tag);
 	}
 	else if (**spec == 'x' || **spec == 'X')
-		;//prtlen = prt_uhexa(param, tag);
-	else
 	{
-		prtlen = 0;
-		//while (*(--(*spec)) != '%');
-		//return (0);
+		if (tag.precision != UNSET)
+			tag.zero_flag = FALSE;
+		if (**spec == 'X')
+			prtlen = prt_hexa(param, tag, TRUE);
+		else
+			prtlen = prt_hexa(param, tag, FALSE);
 	}
+	else
+		prtlen = 0;
 	return (prtlen);
 }
 

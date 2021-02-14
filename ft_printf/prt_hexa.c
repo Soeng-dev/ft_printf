@@ -19,11 +19,11 @@ int get_total_hexalen(int sig_digitlen, t_tag tag)
 
 	total_hexalen = MAX(tag.precision, sig_digitlen);
 	if (tag.zero_flag)
-		total_hexalen = MAX(tag.width, total_intlen);
+		total_hexalen = MAX(tag.width, total_hexalen);
 	return (total_hexalen);
 }
 
-int		prt_hexa(va_list param, t_tag tag)
+int		prt_hexa(va_list param, t_tag tag, int is_capital)
 {
 	unsigned long long	i;
 	unsigned long long	temp;
@@ -63,7 +63,10 @@ int		prt_hexa(va_list param, t_tag tag)
 		write(1, "0", 1);
 		++prtlen;
 	}
- 	ft_putnbr_fd(i, 1);
+	if (is_capital)
+		ft_putnbr_base(i, "0123456789ABCDEF", 16);
+	else 
+		ft_putnbr_base(i, "0123456789abcdef", 16);
 	prtlen += sig_digitlen;
 	if (tag.aligned == LEFT)
 	{

@@ -17,8 +17,7 @@
 # include <limits.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
-
-#include <stdio.h>
+# include "../utils/ft_putnbr_base.h"
 
 # define TRUE (1)
 # define FALSE (0)
@@ -43,5 +42,7 @@ int		prt_int(va_list param, t_tag tag);
 int		prt_uint(va_list param, t_tag tag);
 int		prt_str(va_list param, t_tag tag);
 int		prt_char(va_list param, t_tag tag);
+int		prt_hexa(va_list param, t_tag tag, int is_capital);
+
 
 #endif

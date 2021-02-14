@@ -12,32 +12,6 @@
 
 #include <unistd.h>
 
-int		check_base(char *base)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (base[i] != '\0')
-	{
-		if (base[i] == '+' || base[i] == '-' || base[i] == ' '
-			|| (9 <= base[i] && base[i] <= 13))
-			return ((int)0);
-		else
-		{
-			j = i + 1;
-			while (base[j] != '\0')
-			{
-				if (base[j] == base[i])
-					return ((int)0);
-				j++;
-			}
-		}
-		i++;
-	}
-	return (i);
-}
-
 int		convert_digit(char digit, char *base)
 {
 	int ret;
@@ -52,18 +26,16 @@ int		convert_digit(char digit, char *base)
 	return (ret);
 }
 
-int		ft_atoi_base(char *str, char *base)
+int		ft_atoi_base(char *str, char *base, int base_size)
 {
-	int base_size;
 	int ret;
 	int sign;
 	int converted_digit;
 
 	ret = 0;
 	sign = 1;
-	base_size = check_base(base);
 	if (base_size <= 1)
-		return (0);
+		return (-1);
 	while ((9 <= *str && *str <= 13) || *str == ' ')
 		str++;
 	while (*str == '+' || *str == '-')
