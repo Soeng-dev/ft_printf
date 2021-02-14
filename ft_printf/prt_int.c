@@ -1,0 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prt_int.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
+/*   Updated: 2021/02/09 17:40:46 by soekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+//get length of integer consider tag
+int get_total_intlen(int digitlen, int sign, t_tag tag)
+{
+	int	total_intlen;
+
+	total_intlen = digitlen;
+	total_intlen = MAX(tag.precision, total_intlen);
+	if (sign < 0)
+		++total_intlen;
+	if (tag.zero_flag)
+		total_intlen = MAX(tag.width, total_intlen);
+	return (total_intlen);
+}
+
+int		prt_int(va_list param, t_tag tag)
+{
+	long long int	i;
+	long long int	temp;
+	int		prtlen;
+	int		total_intlen;
+	int		digitlen;
+
+	i = (long long int)va_arg(param, int);
+	temp = (long long int)((i < 0) ? -i : i);
+	digitlen = 1;
+	while ((temp /= 10) > 0)
+		++digitlen;
+	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
+	prtlen = 0;
+	//from here print starts
+	//first condition states print before significant digit numbers 
+	if (tag.zero_flag)
+	{
+		if (i < 0)
+  		{
+ 			write(1, "-", 1);
+			++prtlen;
+  		}
+		while (prtlen < tag.width - digitlen)
+  		{
+  			write(1, "0", 1);
+  			++prtlen;
+  		}
+  	}
+	else if (tag.aligned == RIGHT)
+	{
+  		while (prtlen < tag.width - total_intlen)
+  		{
+  			write(1, " ", 1);
+  			++prtlen;
+  		}
+	}
+	if (i < 0 && tag.zero_flag == FALSE)
+	{
+		write(1, "-", 1);
+		++prtlen;
+	}
+	//prints significant digit numbers
+	temp = -1;
+	while (++temp < tag.precision - digitlen)
+	{
+		write(1, "0", 1);
+		++prtlen;
+	}
+	temp = (long long int)((i < 0) ? -i : i);
+	ft_putnbr_fd(temp, 1);
+	prtlen += digitlen;
+	if (tag.aligned == LEFT)
+	{
+		while (prtlen < tag.width)
+		{
+			write(1, " ", 1);
+			++prtlen;
+		}
+	}
+	return (prtlen);
+}
