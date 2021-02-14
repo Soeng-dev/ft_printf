@@ -65,8 +65,8 @@ int		prt_data(const char **spec, va_list param)
 	}
 	else if (**spec == 'd' || **spec == 'i')
 		prtlen = prt_int(param, tag);
-	else if (**spec == 'u') ;
-		//prtlen = prt_uint(param, tag);
+	else if (**spec == 'u') 
+		prtlen = prt_uint(param, tag);
 	else if (**spec == 'x' || **spec == 'X') ;
 		//prtlen = prt_uhexa(param, tag);
 	else
@@ -103,5 +103,5 @@ int		ft_printf(const char *format, ...)
 
 int main()
 {
-	ft_printf("%013d\n", 7);
+	int n  =ft_printf("%013u\n", 7);
 }

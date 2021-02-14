@@ -31,10 +31,10 @@ typedef struct s_tag
 {
 	int		aligned;
 	int		zero_flag;
-	long int	precision;
-	long int	width;
+	int		precision;
+	int		width;
 } t_tag;
 
 int		prt_int(va_list param, t_tag tag);
-
+int		prt_uint(va_list param, t_tag tag);
 #endif

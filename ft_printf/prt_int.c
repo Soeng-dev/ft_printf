@@ -35,7 +35,7 @@ int		prt_int(va_list param, t_tag tag)
 	int		digitlen;
 
 	i = (long long int)va_arg(param, int);
-	temp = (long long int)((i < 0) ? -i : i);
+	temp = (i < 0) ? -i : i;
 	digitlen = 1;
 	while ((temp /= 10) > 0)
 		++digitlen;
@@ -76,8 +76,61 @@ int		prt_int(va_list param, t_tag tag)
 		write(1, "0", 1);
 		++prtlen;
 	}
-	temp = (long long int)((i < 0) ? -i : i);
+	temp = (i < 0) ? -i : i;
 	ft_putnbr_fd(temp, 1);
+	prtlen += digitlen;
+	if (tag.aligned == LEFT)
+	{
+		while (prtlen < tag.width)
+		{
+			write(1, " ", 1);
+			++prtlen;
+		}
+	}
+	return (prtlen);
+}
+
+int		prt_uint(va_list param, t_tag tag)
+{
+	unsigned long long	i;
+	unsigned long long	temp;
+	int			prtlen;
+	int			total_intlen;
+	int			digitlen;
+
+	i = (unsigned long long)va_arg(param, unsigned int);
+	temp = i;
+	digitlen = 1;
+	while ((temp /= 10) > 0)
+		++digitlen;
+	total_intlen = get_total_intlen(digitlen, 1, tag);
+	prtlen = 0;
+	//from here print starts
+	//first condition states print before significant digit numbers 
+	if (tag.zero_flag)
+	{
+		while (prtlen < tag.width - digitlen)
+  		{
+  			write(1, "0", 1);
+  			++prtlen;
+  		}
+  	}
+	else if (tag.aligned == RIGHT)
+	{
+  		while (prtlen < tag.width - total_intlen)
+  		{
+  			write(1, " ", 1);
+  			++prtlen;
+  		}
+	}
+	//prints significant digit numbers
+	temp = -1;
+	while ((signed int)(++temp) < tag.precision - digitlen)
+	{
+		write(1, "0", 1);
+		++prtlen;
+	}
+ 	ft_putnbr_fd(i, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
 	{
