@@ -12,8 +12,11 @@
 
 #include "ft_printf.h"
 
+/*only defined flag priority (indicated by gcc compiler) considered in tag managing part
+**others at conversion part (for extensibility of flag condition)*/
+
 // make this functions extensible for bonus
-int		prt_data(const char **spec, va_list param)
+int		prt_param(const char **spec, va_list param)
 {
 	int		prtlen;
 	t_tag		tag;
@@ -22,8 +25,6 @@ int		prt_data(const char **spec, va_list param)
 	ft_memset((void*)&tag, 0, sizeof(tag));
 	tag.precision = UNSET;
 	//-0.*
-	//consider priority of flag at conversion conditions states below
-	//only certainly common priority of flag indicated by gcc compiler should be considered in here
 	while (*(++(*spec)))
 	{
 		if (**spec == '0')
@@ -53,7 +54,7 @@ int		prt_data(const char **spec, va_list param)
 		else
 			break;//break loop when meet char is not flag
 	}
-	//print data with pecified conversion
+	//print data with specified conversion
 	//may need to divide into function prt_data
 	if (**spec == 'c')
 		prtlen = prt_char(param, tag);
@@ -94,7 +95,7 @@ int		ft_printf(const char *format, ...)
 	while (*format)
 	{	
 		if (*format == '%')
-			prtlen += (prt_data(&format, param));
+			prtlen += (prt_param(&format, param));
 		else
 		{
 			write(1, format, 1);
