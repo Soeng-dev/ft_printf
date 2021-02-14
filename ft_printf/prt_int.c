@@ -17,8 +17,7 @@ int get_total_intlen(int digitlen, int sign, t_tag tag)
 {
 	int	total_intlen;
 
-	total_intlen = digitlen;
-	total_intlen = MAX(tag.precision, total_intlen);
+	total_intlen = MAX(tag.precision, digitlen);
 	if (sign < 0)
 		++total_intlen;
 	if (tag.zero_flag)
@@ -39,6 +38,8 @@ int		prt_int(va_list param, t_tag tag)
 	digitlen = 1;
 	while ((temp /= 10) > 0)
 		++digitlen;
+	if (tag.precision != UNSET)
+		tag.zero_flag = FALSE;
 	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	prtlen = 0;
 	//from here print starts

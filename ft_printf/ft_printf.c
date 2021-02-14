@@ -20,8 +20,10 @@ int		prt_data(const char **spec, va_list param)
 
 	prtlen = 0;
 	ft_memset((void*)&tag, 0, sizeof(tag));
+	tag.precision = UNSET;
 	//-0.*
-	//consider flag priority here
+	//consider priority of flag at conversion conditions states below
+	//only certainly common priority of flag indicated by gcc compiler should be considered in here
 	while (*(++(*spec)))
 	{
 		if (**spec == '0')
@@ -44,7 +46,6 @@ int		prt_data(const char **spec, va_list param)
 				tag.precision = ft_atoi(++(*spec));
 				while (ft_isdigit(*(*spec + 1)))
 					++(*spec);
-				tag.zero_flag = FALSE; 
 			}
 		}
 		else if (**spec == '*')
@@ -54,21 +55,26 @@ int		prt_data(const char **spec, va_list param)
 	}
 	//print data with pecified conversion
 	//may need to divide into function prt_data
-	if (**spec == 'c') ;
-		//prtlen = prt_char(param, tag);
-	else if (**spec == 's') ;
-	//	prtlen = prt_str(param, tag);
+	if (**spec == 'c')
+		prtlen = prt_char(param, tag);
+	else if (**spec == 's')
+		prtlen = prt_str(param, tag);
 	else if (**spec == 'p') 
 	{
 		//use print_memory
 	//	va_arg
 	}
-	else if (**spec == 'd' || **spec == 'i')
-		prtlen = prt_int(param, tag);
-	else if (**spec == 'u') 
-		prtlen = prt_uint(param, tag);
-	else if (**spec == 'x' || **spec == 'X') ;
-		//prtlen = prt_uhexa(param, tag);
+	else if (**spec == 'd' || **spec == 'i' || **spec == 'u')
+	{
+		if (tag.precision != UNSET)
+			tag.zero_flag = FALSE;
+		if (**spec == 'u') 
+			prtlen = prt_uint(param, tag);
+		else
+			prtlen = prt_int(param, tag);
+	}
+	else if (**spec == 'x' || **spec == 'X')
+		;//prtlen = prt_uhexa(param, tag);
 	else
 	{
 		prtlen = 0;
@@ -103,5 +109,7 @@ int		ft_printf(const char *format, ...)
 
 int main()
 {
-	int n  =ft_printf("%013u\n", 7);
+	int n  =ft_printf(IP);
+	ft_putstr_fd("\nreturn : ", 1);
+	ft_putnbr_fd(n,1);
 }

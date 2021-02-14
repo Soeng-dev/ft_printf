@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   prt_char.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,38 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+#include "ft_printf.h"
 
-#include <stdio.h>
-
-# define TRUE (1)
-# define FALSE (0)
-
-# define RIGHT (0)
-# define LEFT (1)
-
-# define UNSET (-1)
-
-# define MAX(A, B) (((A) > (B)) ? (A) : (B))
-# define MIN(A, B) (((A) < (B)) ? (A) : (B))
-
-typedef struct s_tag
+int		prt_char(va_list param, t_tag tag)
 {
-	int		aligned;
-	int		zero_flag;
-	int		precision;
-	int		width;
-} t_tag;
+	int	c;
+	int	prtlen;
 
-int		prt_int(va_list param, t_tag tag);
-int		prt_uint(va_list param, t_tag tag);
-int		prt_str(va_list param, t_tag tag);
-int		prt_char(va_list param, t_tag tag);
-
-#endif
+	c = va_arg(param, int);
+	prtlen = 0;
+	if (tag.zero_flag)
+	{
+		while (prtlen < tag.width - 1)
+  		{
+  			write(1, "0", 1);
+  			++prtlen;
+  		}
+  	}
+	else if (tag.aligned == RIGHT)
+	{
+  		while (prtlen < tag.width - 1)
+  		{
+  			write(1, " ", 1);
+  			++prtlen;
+  		}
+	}
+	ft_putchar_fd(c, 1);
+	++prtlen;
+	if (tag.aligned == LEFT)
+	{
+		while (prtlen < tag.width)
+		{
+			write(1, " ", 1);
+			++prtlen;
+		}
+	}
+	return (prtlen);
+}
