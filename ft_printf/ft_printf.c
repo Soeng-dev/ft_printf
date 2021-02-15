@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/09 17:40:46 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/15 21:11:57 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		prt_param(const char **spec, va_list param)
 		else if (**spec == '*')
 			tag.width = va_arg(param, int);
 		else
-			break;//break loop when meet char is not flag
+			break;//break loop when meet char not flag
 	}
 	//print data with specified conversion
 	//may need to divide into function prt_data
