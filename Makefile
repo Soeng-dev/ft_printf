@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 AR = ar -crs
 COMP = gcc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBFT = -L./libft -lft
 SRC = ./ft_printf/ft_printf.c		\
 	  ./ft_printf/ft_putnbr_base.c	\

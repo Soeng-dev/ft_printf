@@ -85,7 +85,7 @@ int		ft_printf(const char *format, ...)
 	va_list		param;
 
 	prtlen = 0;
-	va_start(param, ft_strlen(format));
+	va_start(param, format);
 	while (*format)
 	{	
 		if (*format == '%')

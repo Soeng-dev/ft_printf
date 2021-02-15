@@ -24,7 +24,6 @@
 int		prt_str(va_list param, t_tag tag)
 {
 	char	*str;
-	char	*temp;
 	int	prtlen;
 	int	strlen;
 
