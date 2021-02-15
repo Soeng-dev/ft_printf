@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prt_hexa.c                                         :+:      :+:    :+:   */
+/*   prt_ptr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,36 +13,38 @@
 #include "ft_printf.h"
 
 //get length of integer consider tag
-int get_total_hexalen(int sig_digitlen, t_tag tag)
+int get_total_addrlen(int sig_addrlen, t_tag tag)
 {
-	int	total_hexalen;
+	int	total_addrlen;
 
-	total_hexalen = MAX(tag.precision, sig_digitlen);
+	total_addrlen = 2 + MAX(tag.precision, sig_addrlen);
 	if (tag.zero_flag)
-		total_hexalen = MAX(tag.width, total_hexalen);
-	return (total_hexalen);
+		total_addrlen = MAX(tag.width, total_addrlen);
+	return (total_addrlen);
 }
 
-int		prt_hexa(va_list param, t_tag tag, int is_capital)
+int		prt_ptr(va_list param, t_tag tag)
 {
-	unsigned long long	i;
+	unsigned long long	addr;
 	unsigned long long	temp;
 	int			prtlen;
-	int			total_hexalen;
-	int			sig_digitlen;
+	int			total_addrlen;
+	int			sig_addrlen;
 
-	i = (unsigned long long)va_arg(param, unsigned int);
-	temp = i;
-	sig_digitlen = 1;
+	addr = (unsigned long long)va_arg(param, void *);
+	temp = addr;
+	sig_addrlen = 1;
 	while ((temp /= 16) > 0)
-		++sig_digitlen;
-	total_hexalen = get_total_hexalen(sig_digitlen, tag);
+		++sig_addrlen;
+	total_addrlen = get_total_addrlen(sig_addrlen, tag);
 	prtlen = 0;
 	//from here print starts
-	//first condition states print before significant digit numbers 
+	//first condition states print before significant addr numbers 
 	if (tag.zero_flag)
 	{
-		while (prtlen < tag.width - sig_digitlen)
+		write(1, "0x", 2);
+		prtlen += 2;
+		while (prtlen < tag.width - sig_addrlen)
   		{
   			write(1, "0", 1);
   			++prtlen;
@@ -50,24 +52,26 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
   	}
 	else if (tag.aligned == RIGHT)
 	{
-  		while (prtlen < tag.width - total_hexalen)
+  		while (prtlen < tag.width - total_addrlen)
   		{
   			write(1, " ", 1);
   			++prtlen;
   		}
 	}
-	//prints significant digit numbers
+	//prints significant addr numbers
 	temp = -1;
-	while ((signed int)(++temp) < tag.precision - sig_digitlen)
+	if (tag.zero_flag == FALSE)
+	{
+		write(1, "0x", 2);
+		prtlen += 2;
+	}
+	while ((signed int)(++temp) < tag.precision - sig_addrlen)
 	{
 		write(1, "0", 1);
 		++prtlen;
 	}
-	if (is_capital)
-		ft_putnbr_base(i, "0123456789ABCDEF", 16);
-	else 
-		ft_putnbr_base(i, "0123456789abcdef", 16);
-	prtlen += sig_digitlen;
+	ft_putnbr_base(addr, "0123456789abcdef", 16);
+	prtlen += sig_addrlen;
 	if (tag.aligned == LEFT)
 	{
 		while (prtlen < tag.width)

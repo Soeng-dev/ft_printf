@@ -18,7 +18,6 @@
 // make this functions extensible for bonus
 int		prt_param(const char **spec, va_list param)
 {
-	int		prtlen;
 	t_tag		tag;
 
 	ft_memset((void*)&tag, 0, sizeof(tag));
@@ -56,35 +55,26 @@ int		prt_param(const char **spec, va_list param)
 	//print data with specified conversion
 	//may need to divide into function prt_data
 	if (**spec == 'c')
-		prtlen = prt_char(param, tag);
+		return (prt_char(param, tag));
 	else if (**spec == 's')
-		prtlen = prt_str(param, tag);
+		return (prt_str(param, tag));
+	if (tag.precision != UNSET)
+		tag.zero_flag = FALSE;
+	if (**spec == 'd' || **spec == 'i')
+		return (prt_int(param, tag));
+	else if (**spec == 'u') 
+		return (prt_uint(param, tag));
 	else if (**spec == 'p') 
-	{
-		//use print_memory
-	//	va_arg
-	}
-	else if (**spec == 'd' || **spec == 'i' || **spec == 'u')
-	{
-		if (tag.precision != UNSET)
-			tag.zero_flag = FALSE;
-		if (**spec == 'u') 
-			prtlen = prt_uint(param, tag);
-		else
-			prtlen = prt_int(param, tag);
-	}
+		return (prt_ptr(param, tag));
 	else if (**spec == 'x' || **spec == 'X')
 	{
-		if (tag.precision != UNSET)
-			tag.zero_flag = FALSE;
 		if (**spec == 'X')
-			prtlen = prt_hexa(param, tag, TRUE);
+			return (prt_hexa(param, tag, TRUE));
 		else
-			prtlen = prt_hexa(param, tag, FALSE);
+			return (prt_hexa(param, tag, FALSE));
 	}
 	else
-		prtlen = 0;
-	return (prtlen);
+		return (0);
 }
 
 int		ft_printf(const char *format, ...)

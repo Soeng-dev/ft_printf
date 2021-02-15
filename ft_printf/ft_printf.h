@@ -43,6 +43,6 @@ int		prt_uint(va_list param, t_tag tag);
 int		prt_str(va_list param, t_tag tag);
 int		prt_char(va_list param, t_tag tag);
 int		prt_hexa(va_list param, t_tag tag, int is_capital);
-
+int		prt_ptr(va_list param, t_tag tag);
 
 #endif
