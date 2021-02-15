@@ -46,6 +46,8 @@ int		prt_param(const char **spec, va_list param)
 				while (ft_isdigit(*(*spec + 1)))
 					++(*spec);
 			}
+			else
+				tag.precision = 0;
 		}
 		else if (**spec == '*')
 			tag.width = va_arg(param, int);
@@ -97,12 +99,4 @@ int		ft_printf(const char *format, ...)
 	}
 	va_end(param);
 	return (prtlen);
-}
-
-
-int main()
-{
-	int n  =ft_printf(IP);
-	ft_putstr_fd("\nreturn : ", 1);
-	ft_putnbr_fd(n,1);
 }
