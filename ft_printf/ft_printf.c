@@ -50,7 +50,14 @@ int		prt_param(const char **spec, va_list param)
 				tag.precision = 0;
 		}
 		else if (**spec == '*')
-			tag.width = va_arg(param, int);
+		{
+			if ((tag.width = va_arg(param, int)) < 0)
+			{
+				tag.width = -tag.width;
+				tag.aligned = LEFT;
+				tag.zero_flag = FALSE;
+			}
+		}
 		else
 			break;//break loop when meet char not flag
 	}
