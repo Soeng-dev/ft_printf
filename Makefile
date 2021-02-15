@@ -1,0 +1,38 @@
+NAME = ft_printf.a
+AR = ar -crs
+COMP = gcc
+FLAGS = -Wall -Wextra -Werror
+SRC =	./ft_printf/ft_printf.c			\
+	./ft_printf/prt_char.c			\
+	./ft_printf/prt_int.c			\
+	./ft_printf/prt_str.c			\
+	./ft_printf/prt_hexa.c			\
+	./ft_printf/prt_ptr.c			\
+	./ft_printf/ft_putnbr_base.c		\
+OBJ = $(SRC:.c=.o)
+	INC_LINK = -I./includes
+	LIBFT = -L./libft -lft
+
+all : $(NAME)
+
+$(NAME) : $(OBJ) libft
+		cp libft/libft.a ./$(NAME)
+		$(AR) $(NAME) $(OBJ)
+
+%.o: %.c
+		$(COMP) $(FLAGS) $(INC_LINK) -c $< -o $(<:.c=.o)
+
+# libft compile
+libft :
+	@$(MAKE) -C ./libft all
+
+clean :
+	@$(MAKE) -C ./libft clean
+	@rm -rf $(OBJ)
+fclean : clean
+	@$(MAKE) -C ./libft fclean
+	@rm -rf $(NAME)
+
+re : fclean all
+
+.PHONY: all clean fclean re libft

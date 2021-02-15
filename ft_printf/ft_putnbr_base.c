@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnbr_base.h"
+#include "ft_printf.h"
 
 int		ft_putnbr_base(unsigned long long n, char *base, int base_size)
 {

@@ -17,14 +17,11 @@
 # include <limits.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
-# include "../utils/ft_putnbr_base.h"
 
-# define TRUE (1)
 # define FALSE (0)
-
+# define TRUE (1)
 # define RIGHT (0)
 # define LEFT (1)
-
 # define UNSET (-1)
 
 # define MAX(A, B) (((A) > (B)) ? (A) : (B))
@@ -44,5 +41,6 @@ int		prt_str(va_list param, t_tag tag);
 int		prt_char(va_list param, t_tag tag);
 int		prt_hexa(va_list param, t_tag tag, int is_capital);
 int		prt_ptr(va_list param, t_tag tag);
+int		ft_putnbr_base(unsigned long long n, char *base, int base_size);
 
 #endif
