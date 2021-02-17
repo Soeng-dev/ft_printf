@@ -48,6 +48,11 @@ int		prt_param(const char **spec, va_list param)
 				while (ft_isdigit(*(*spec + 1)))
 					++(*spec);
 			}
+			else if (*(*spec + 1) == '*')
+			{
+				if ((tag.precision = va_arg(param, int)) < 0)
+					tag.precision = -tag.precision;
+			}
 			else
 				tag.precision = 0;
 		}
