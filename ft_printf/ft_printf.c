@@ -43,6 +43,8 @@ int		prt_param(const char **spec, va_list param)
 			if (ft_isdigit(*(*spec + 1)))
 			{
 				tag.precision = ft_atoi(++(*spec));
+				if (tag.precision < 0)
+					tag.precision = -tag.precision;
 				while (ft_isdigit(*(*spec + 1)))
 					++(*spec);
 			}
