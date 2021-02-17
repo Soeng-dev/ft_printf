@@ -52,6 +52,7 @@ int		prt_param(const char **spec, va_list param)
 			{
 				if ((tag.precision = va_arg(param, int)) < 0)
 					tag.precision = -tag.precision;
+				++(*spec);
 			}
 			else
 				tag.precision = 0;
