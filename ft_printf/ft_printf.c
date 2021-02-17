@@ -51,7 +51,7 @@ int		prt_param(const char **spec, va_list param)
 			else if (*(*spec + 1) == '*')
 			{
 				if ((tag.precision = va_arg(param, int)) < 0)
-					tag.precision = -tag.precision;
+					tag.precision = UNSET;
 				++(*spec);
 			}
 			else
