@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/09 17:40:46 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:49:27 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int get_total_addrlen(int sig_addrlen, t_tag tag)
 {
 	int	total_addrlen;
 
-	total_addrlen = 2 + MAX(tag.precision, sig_addrlen);
+	total_addrlen = MAX(tag.precision, 2 + sig_addrlen);
 	if (tag.zero_flag)
 		total_addrlen = MAX(tag.width, total_addrlen);
 	return (total_addrlen);
@@ -27,15 +27,18 @@ int		prt_ptr(va_list param, t_tag tag)
 {
 	unsigned long long	addr;
 	unsigned long long	temp;
-	int			prtlen;
-	int			total_addrlen;
-	int			sig_addrlen;
+	int					prtlen;
+	int					total_addrlen;
+	int					sig_addrlen;
 
 	addr = (unsigned long long)va_arg(param, void *);
 	temp = addr;
-	sig_addrlen = 1;
-	while ((temp /= 16) > 0)
+	sig_addrlen = 0;
+	while (temp > 0)
+	{
+		temp /= 16;
 		++sig_addrlen;
+	}
 	total_addrlen = get_total_addrlen(sig_addrlen, tag);
 	prtlen = 0;
 	//from here print starts
