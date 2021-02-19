@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/09 17:40:46 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 09:51:05 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 
 	i = (unsigned long long)va_arg(param, unsigned int);
 	temp = i;
-	sig_digitlen = 1;
-	while ((temp /= 16) > 0)
+	sig_digitlen = 0;
+	while (temp > 0)
+	{
+		temp /= 16;
+		++sig_digitlen;
+	}
+	if (tag.precision == UNSET && sig_digitlen == 0)
 		++sig_digitlen;
 	total_hexalen = get_total_hexalen(sig_digitlen, tag);
 	prtlen = 0;
@@ -63,9 +68,9 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 		write(1, "0", 1);
 		++prtlen;
 	}
-	if (is_capital)
+	if (is_capital && sig_digitlen)
 		ft_putnbr_base(i, "0123456789ABCDEF", 16);
-	else 
+	else if (is_capital == FALSE && sig_digitlen)
 		ft_putnbr_base(i, "0123456789abcdef", 16);
 	prtlen += sig_digitlen;
 	if (tag.aligned == LEFT)

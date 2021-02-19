@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/09 17:40:46 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 09:47:45 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,17 @@ int		prt_int(va_list param, t_tag tag)
 
 	i = (long long int)va_arg(param, int);
 	temp = (i < 0) ? -i : i;
-	digitlen = 1;
-	while ((temp /= 10) > 0)
+	digitlen = 0;
+	while (temp > 0)
+	{
+		temp /= 10;
 		++digitlen;
+	}
 	if (tag.precision != UNSET)
 		tag.zero_flag = FALSE;
-	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
+	if (tag.precision == UNSET && digitlen == 0)
+		++digitlen;
+		total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	prtlen = 0;
 	//from here print starts
 	//first condition states print before significant digit numbers 
@@ -78,7 +83,8 @@ int		prt_int(va_list param, t_tag tag)
 		++prtlen;
 	}
 	temp = (i < 0) ? -i : i;
-	ft_putnbr_fd(temp, 1);
+	if (digitlen)
+		ft_putnbr_fd(temp, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
 	{
@@ -101,8 +107,13 @@ int		prt_uint(va_list param, t_tag tag)
 
 	i = (unsigned long long)va_arg(param, unsigned int);
 	temp = i;
-	digitlen = 1;
-	while ((temp /= 10) > 0)
+	digitlen = 0;
+	while (temp > 0)
+	{
+		temp /= 10;
+		++digitlen;
+	}
+	if (tag.precision == UNSET && digitlen == 0)
 		++digitlen;
 	total_intlen = get_total_intlen(digitlen, 1, tag);
 	prtlen = 0;
@@ -131,7 +142,8 @@ int		prt_uint(va_list param, t_tag tag)
 		write(1, "0", 1);
 		++prtlen;
 	}
- 	ft_putnbr_fd(i, 1);
+	if (digitlen)
+ 		ft_putnbr_fd(i, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
 	{
