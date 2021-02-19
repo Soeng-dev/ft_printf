@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/18 18:49:27 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 09:35:34 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		prt_ptr(va_list param, t_tag tag)
 		temp /= 16;
 		++sig_addrlen;
 	}
+	if (tag.precision == UNSET && sig_addrlen == 0)
+		++sig_addrlen;
 	total_addrlen = get_total_addrlen(sig_addrlen, tag);
 	prtlen = 0;
 	//from here print starts
@@ -73,7 +75,8 @@ int		prt_ptr(va_list param, t_tag tag)
 		write(1, "0", 1);
 		++prtlen;
 	}
-	ft_putnbr_base(addr, "0123456789abcdef", 16);
+	if (sig_addrlen)
+		ft_putnbr_base(addr, "0123456789abcdef", 16);
 	prtlen += sig_addrlen;
 	if (tag.aligned == LEFT)
 	{
