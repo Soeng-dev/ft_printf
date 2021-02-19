@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:57:44 by soekim            #+#    #+#             */
-/*   Updated: 2020/11/21 16:14:32 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 14:26:13 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <sys/types.h>
 
 struct	s_list
 {

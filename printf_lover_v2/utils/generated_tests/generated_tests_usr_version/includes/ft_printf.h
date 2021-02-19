@@ -6,13 +6,12 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/15 21:02:04 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 14:28:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdarg.h>
