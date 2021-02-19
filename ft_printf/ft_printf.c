@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 16:37:40 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 17:43:26 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,24 @@ int		prt_param(const char **spec, va_list param)
 				tag.zero_flag = FALSE;
 			}
 		}
+		//bonus
+		else if (**spec == 'l')
+		{
+			if (tag.memlen == 0)
+				tag.memlen = L;
+			else if (tag.memlen == L)
+				tag.memlen = LL;
+		}
+		else if (**spec == 'h')
+		{
+			if (tag.memlen == 0)
+				tag.memlen = H;
+			else if (tag.memlen == H)
+				tag.memlen = HH;
+		}
 		else
-			break;//break loop when meet char not flag
+			break;	
 	}
-	//print data with specified conversion
-	//may need to divide into function prt_data
 	if (**spec == 'c')
 		return (prt_char(param, tag));
 	else if (**spec == 's')

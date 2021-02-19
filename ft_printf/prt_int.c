@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 09:47:45 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 21:08:48 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,16 @@ int		prt_int(va_list param, t_tag tag)
 	int		total_intlen;
 	int		digitlen;
 
-	i = (long long int)va_arg(param, int);
+	if (tag.memlen == 0)
+		i = (long long int)va_arg(param, int);
+	if (tag.memlen == L)
+		i = (long long int)va_arg(param, long int);
+	if (tag.memlen == LL)
+		i = (long long int)va_arg(param, long long int);
+	if (tag.memlen == H)
+		i = (long long int)((short)va_arg(param, int));
+	if (tag.memlen == HH)
+		i = (long long int)((char)va_arg(param, int));
 	temp = (i < 0) ? -i : i;
 	digitlen = 0;
 	while (temp > 0)
@@ -105,7 +114,17 @@ int		prt_uint(va_list param, t_tag tag)
 	int			total_intlen;
 	int			digitlen;
 
-	i = (unsigned long long)va_arg(param, unsigned int);
+
+	if (tag.memlen == 0)
+		i = (unsigned long long)va_arg(param, unsigned int);
+	if (tag.memlen == L)
+		i = (unsigned long long)va_arg(param, unsigned long);
+	if (tag.memlen == LL)
+		i = (unsigned long long)va_arg(param, unsigned long long);
+	if (tag.memlen == H)
+		i = (unsigned long long)(va_arg(param, unsigned int) & (0xffff));
+	if (tag.memlen == HH)
+		i = (unsigned long long)(va_arg(param, unsigned int) & (0xff));
 	temp = i;
 	digitlen = 0;
 	while (temp > 0)
@@ -143,7 +162,7 @@ int		prt_uint(va_list param, t_tag tag)
 		++prtlen;
 	}
 	if (digitlen)
- 		ft_putnbr_fd(i, 1);
+ 		ft_putuint_fd(i, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
 	{
