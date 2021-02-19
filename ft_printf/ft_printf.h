@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 19:00:58 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 21:14:08 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_tag
 	int		width;
 	//bonus
 	int		memlen;
+	int		sign_flag;
 } t_tag;
 
 int		prt_int(va_list param, t_tag tag);

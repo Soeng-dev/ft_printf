@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 17:43:26 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 21:23:08 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,12 @@ int		prt_param(const char **spec, va_list param)
 			else if (tag.memlen == H)
 				tag.memlen = HH;
 		}
+		else if (**spec == ' ')
+			tag.sign_flag = ' ';
+		else if (**spec == '+' && tag.sign_flag != ' ')
+			tag.sign_flag = '+';	
 		else
-			break;	
+			break;
 	}
 	if (**spec == 'c')
 		return (prt_char(param, tag));

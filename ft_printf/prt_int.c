@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 21:08:48 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 21:30:38 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int get_total_intlen(int digitlen, int sign, t_tag tag)
 	int	total_intlen;
 
 	total_intlen = MAX(tag.precision, digitlen);
-	if (sign < 0)
+	if (sign < 0 || tag.sign_flag != 0)
 		++total_intlen;
 	if (tag.zero_flag)
 		total_intlen = MAX(tag.width, total_intlen);
