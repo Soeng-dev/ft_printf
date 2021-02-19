@@ -6,23 +6,29 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 14:29:06 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 15:15:43 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int test;
 int		prt_str(va_list param, t_tag tag)
 {
 	char	*str;
+	int		str_is_null;
 	int		prtlen;
 	int		strlen;
-++test;
+	
+	str_is_null = FALSE;
 	str = va_arg(param, char *);
-	if (test == 4481) write(1,"bfolen",6);
-	strlen = (int)ft_strlen(str);
-	if (test == 4481) write(1,"aftlen",6);
+	if ((strlen = (int)ft_strlen(str)) == IS_NULL)
+	{
+		if ((str = (char *)malloc(7)) == NULL)
+			return (0);
+		ft_memcpy(str, "(null)", 6);
+		strlen = 6;
+		str_is_null = TRUE;
+	}
 	if (tag.precision != UNSET)
 		strlen = MIN(strlen, tag.precision);
 	prtlen = 0;
@@ -52,5 +58,7 @@ int		prt_str(va_list param, t_tag tag)
 			++prtlen;
 		}
 	}
+	if (str_is_null)
+		free(str);
 	return (prtlen);
 }

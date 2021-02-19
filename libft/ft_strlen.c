@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 14:40:42 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 14:47:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t		ft_strlen(const char *s)
 	size_t	len;
 
 	if (!s)
-		return (0);
+		return (IS_NULL);
 	len = 0;
 	while (*s)
 	{

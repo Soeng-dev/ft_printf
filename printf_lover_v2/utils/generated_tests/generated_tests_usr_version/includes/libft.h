@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:57:44 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 14:26:13 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 14:48:21 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <limits.h>
 # include <sys/types.h>
+
+# define IS_NULL (-1)
 
 struct	s_list
 {
