@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 14:56:30 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 16:35:26 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		prt_str(va_list param, t_tag tag);
 int		prt_char(va_list param, t_tag tag);
 int		prt_hexa(va_list param, t_tag tag, int is_capital);
 int		prt_ptr(va_list param, t_tag tag);
+int		prt_pct(t_tag tag);
 int		ft_putnbr_base(unsigned long long n, char *base, int base_size);
 int		ft_printf(const char *format, ...);
 #endif

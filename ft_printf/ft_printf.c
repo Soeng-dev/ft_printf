@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 15:45:35 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 16:37:40 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,6 @@ int		prt_param(const char **spec, va_list param)
 				tag.zero_flag = FALSE;
 			}
 		}
-		else if (**spec == '%')
-		{
-			write(1, "%", 1);
-			return (1);
-		}
 		else
 			break;//break loop when meet char not flag
 	}
@@ -77,7 +72,9 @@ int		prt_param(const char **spec, va_list param)
 	if (**spec == 'c')
 		return (prt_char(param, tag));
 	else if (**spec == 's')
-		 return (prt_str(param, tag));
+		return (prt_str(param, tag));
+	else if (**spec == '%')
+		return (prt_pct(tag));
 	if (tag.precision != UNSET)
 		tag.zero_flag = FALSE;
 	if (**spec == 'd' || **spec == 'i')

@@ -9,7 +9,8 @@ SRC = ./ft_printf/ft_printf.c		\
 	  ./ft_printf/prt_hexa.c		\
 	  ./ft_printf/prt_int.c			\
 	  ./ft_printf/prt_ptr.c			\
-	  ./ft_printf/prt_str.c	
+	  ./ft_printf/prt_str.c			\
+	  ./ft_printf/prt_pct.c
 
 OBJ = $(SRC:.c=.o)
 
