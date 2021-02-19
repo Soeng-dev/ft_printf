@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:34:58 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 10:51:38 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 15:34:08 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int main()
 	char s[] = "(null)";
 	//int n = printf(IP);
 	int m = ft_printf(IP);
-	while(1);
+	//while(1);
 }

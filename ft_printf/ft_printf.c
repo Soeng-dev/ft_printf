@@ -6,7 +6,7 @@
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 13:02:02 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/19 15:45:35 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int		prt_param(const char **spec, va_list param)
 				tag.aligned = LEFT;
 				tag.zero_flag = FALSE;
 			}
+		}
+		else if (**spec == '%')
+		{
+			write(1, "%", 1);
+			return (1);
 		}
 		else
 			break;//break loop when meet char not flag
