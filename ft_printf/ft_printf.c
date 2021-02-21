@@ -15,13 +15,14 @@
 /*only defined flag priority (indicated by gcc compiler) considered in tag managing part
 **others at conversion part (for extensibility of flag condition)*/
 
-// make this functions extensible for bonus
-int		prt_param(const char **spec, va_list param)
+int		prt_param(const char **spec, va_list param, int prtlen)
 {
+	const char	*start;
 	t_tag		tag;
 
 	ft_memset((void*)&tag, 0, sizeof(tag));
 	tag.precision = UNSET;
+	start = *spec;
 	//-0.*
 	while (*(++(*spec)))
 	{
@@ -82,7 +83,7 @@ int		prt_param(const char **spec, va_list param)
 		else if (**spec == ' ')
 			tag.sign_flag = ' ';
 		else if (**spec == '+' && tag.sign_flag != ' ')
-			tag.sign_flag = '+';	
+			tag.sign_flag = '+';
 		else
 			break;
 	}
@@ -92,6 +93,11 @@ int		prt_param(const char **spec, va_list param)
 		return (prt_str(param, tag));
 	else if (**spec == '%')
 		return (prt_pct(tag));
+	else if (**spec == 'n')
+	{
+		*(va_arg(param, int *)) = prtlen + ((*spec - start) / sizeof(char *));
+		return (0);
+	}
 	if (tag.precision != UNSET)
 		tag.zero_flag = FALSE;
 	if (**spec == 'd' || **spec == 'i')
@@ -121,7 +127,7 @@ int		ft_printf(const char *format, ...)
 	while (*format)
 	{	
 		if (*format == '%')
-			prtlen += (prt_param(&format, param));
+			prtlen += (prt_param(&format, param, prtlen));
 		else
 		{
 			write(1, format, 1);
