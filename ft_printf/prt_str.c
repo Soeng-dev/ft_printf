@@ -18,7 +18,6 @@ int		prt_str(va_list param, t_tag tag)
 	int		prtlen;
 	int		strlen;
 	
-	str_is_null = FALSE;
 	str = va_arg(param, char *);
 	if ((strlen = (int)ft_strlen(str)) == IS_NULL)
 	{
