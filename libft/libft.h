@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:57:44 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 14:48:21 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/21 19:41:14 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <limits.h>
 # include <sys/types.h>
 
-# define IS_NULL (-1)
+# define IS_NULL -1
 
 struct	s_list
 {
@@ -59,7 +59,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_putchar_fd(int c, int fd);
-int	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(long long int n, int fd);
 t_list	*ft_lstnew(void *content);

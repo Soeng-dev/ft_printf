@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   prt_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
+/*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 14:00:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/19 21:30:38 by soekim           ###   ########.fr       */
+/*   Created: 2021/02/21 19:54:55 by soekim            #+#    #+#             */
+/*   Updated: 2021/02/21 21:40:35 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//get length of integer consider tag
-int get_total_intlen(int digitlen, int sign, t_tag tag)
+int		get_total_intlen(int digitlen, int sign, t_tag tag)
 {
 	int	total_intlen;
 
-	total_intlen = MAX(tag.precision, digitlen);
+	total_intlen = ftmax(tag.precision, digitlen);
 	if (sign < 0 || tag.sign_flag != 0)
 		++total_intlen;
 	if (tag.zero_flag)
-		total_intlen = MAX(tag.width, total_intlen);
+		total_intlen = ftmax(tag.width, total_intlen);
 	return (total_intlen);
 }
 
@@ -29,19 +28,20 @@ int		prt_int(va_list param, t_tag tag)
 {
 	long long int	i;
 	long long int	temp;
-	int		prtlen;
-	int		total_intlen;
-	int		digitlen;
+	int				prtlen;
+	int				total_intlen;
+	int				digitlen;
 
+	i = 0;
 	if (tag.memlen == 0)
 		i = (long long int)va_arg(param, int);
-	if (tag.memlen == L)
+	else if (tag.memlen == L)
 		i = (long long int)va_arg(param, long int);
-	if (tag.memlen == LL)
+	else if (tag.memlen == LL)
 		i = (long long int)va_arg(param, long long int);
-	if (tag.memlen == H)
+	else if (tag.memlen == H)
 		i = (long long int)((short)va_arg(param, int));
-	if (tag.memlen == HH)
+	else if (tag.memlen == HH)
 		i = (long long int)((char)va_arg(param, int));
 	temp = (i < 0) ? -i : i;
 	digitlen = 0;
@@ -59,10 +59,9 @@ int		prt_int(va_list param, t_tag tag)
 	if (tag.zero_flag)
 	{
 		if (i < 0)
-  			prtlen += iter_write('-', 1);
+			prtlen += iter_write('-', 1);
 		prtlen += iter_write('0', tag.width - digitlen - prtlen);
-  	}
-
+	}
 	else if (tag.aligned == RIGHT)
 		prtlen += iter_write(' ', tag.width - total_intlen);
 	if (i < 0 && tag.zero_flag == FALSE)
@@ -81,20 +80,20 @@ int		prt_uint(va_list param, t_tag tag)
 {
 	unsigned long long	i;
 	unsigned long long	temp;
-	int			prtlen;
-	int			total_intlen;
-	int			digitlen;
+	int					prtlen;
+	int					total_intlen;
+	int					digitlen;
 
-
+	i = 0;
 	if (tag.memlen == 0)
 		i = (unsigned long long)va_arg(param, unsigned int);
-	if (tag.memlen == L)
+	else if (tag.memlen == L)
 		i = (unsigned long long)va_arg(param, unsigned long);
-	if (tag.memlen == LL)
+	else if (tag.memlen == LL)
 		i = (unsigned long long)va_arg(param, unsigned long long);
-	if (tag.memlen == H)
+	else if (tag.memlen == H)
 		i = (unsigned long long)(va_arg(param, unsigned int) & (0xffff));
-	if (tag.memlen == HH)
+	else if (tag.memlen == HH)
 		i = (unsigned long long)(va_arg(param, unsigned int) & (0xff));
 	temp = i;
 	digitlen = 0;
@@ -113,7 +112,7 @@ int		prt_uint(va_list param, t_tag tag)
 		prtlen += iter_write(' ', tag.width - total_intlen);
 	prtlen += iter_write('0', tag.precision - digitlen);
 	if (digitlen)
- 		ft_putuint_fd(i, 1);
+		ft_putuint_fd(i, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
 		prtlen += iter_write(' ', tag.width - prtlen);
