@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim </var/mail/soekim>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -49,6 +49,7 @@ int		prt_char(va_list param, t_tag tag);
 int		prt_hexa(va_list param, t_tag tag, int is_capital);
 int		prt_ptr(va_list param, t_tag tag);
 int		prt_pct(t_tag tag);
+int		iter_write(char c, int iter);
 void	ft_putuint_fd(unsigned long long n, int fd);
 int		ft_putnbr_base(unsigned long long n, char *base, int base_size);
 int		ft_printf(const char *format, ...);

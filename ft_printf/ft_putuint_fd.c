@@ -16,7 +16,7 @@ void	ft_putuint_fd(unsigned long long n, int fd)
 {
 	char	num;
 
-	if (n >= 0 && n < 10)
+	if (n < 10)
 	{
 		n += '0';
 		num = (char)n;

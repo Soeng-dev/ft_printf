@@ -54,7 +54,7 @@ int		prt_int(va_list param, t_tag tag)
 		tag.zero_flag = FALSE;
 	if (tag.precision == UNSET && digitlen == 0)
 		++digitlen;
-		total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
+	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	prtlen = 0;
 	//from here print starts
 	//first condition states print before significant digit numbers 
