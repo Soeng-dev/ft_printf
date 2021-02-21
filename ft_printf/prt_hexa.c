@@ -55,40 +55,17 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 	//from here print starts
 	//first condition states print before significant digit numbers 
 	if (tag.zero_flag)
-	{
-		while (prtlen < tag.width - sig_digitlen)
-  		{
-  			write(1, "0", 1);
-  			++prtlen;
-  		}
-  	}
+		prtlen += iter_write('0', tag.width - sig_digitlen);
 	else if (tag.aligned == RIGHT)
-	{
-  		while (prtlen < tag.width - total_hexalen)
-  		{
-  			write(1, " ", 1);
-  			++prtlen;
-  		}
-	}
+		prtlen += iter_write(' ', tag.width - total_hexalen);
 	//prints significant digit numbers
-	temp = -1;
-	while ((signed int)(++temp) < tag.precision - sig_digitlen)
-	{
-		write(1, "0", 1);
-		++prtlen;
-	}
+	prtlen += iter_write('0', tag.precision - sig_digitlen);
 	if (is_capital && sig_digitlen)
 		ft_putnbr_base(i, "0123456789ABCDEF", 16);
 	else if (is_capital == FALSE && sig_digitlen)
 		ft_putnbr_base(i, "0123456789abcdef", 16);
 	prtlen += sig_digitlen;
 	if (tag.aligned == LEFT)
-	{
-		while (prtlen < tag.width)
-		{
-			write(1, " ", 1);
-			++prtlen;
-		}
-	}
+		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
 }

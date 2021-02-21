@@ -43,48 +43,24 @@ int		prt_ptr(va_list param, t_tag tag)
 		++sig_addrlen;
 	total_addrlen = get_total_addrlen(sig_addrlen, tag);
 	prtlen = 0;
-	//from here print starts
-	//first condition states print before significant addr numbers 
 	if (tag.zero_flag)
 	{
 		write(1, "0x", 2);
 		prtlen += 2;
-		while (prtlen < tag.width - sig_addrlen)
-  		{
-  			write(1, "0", 1);
-  			++prtlen;
-  		}
+		prtlen += iter_write('0', tag.width - sig_addrlen);
   	}
 	else if (tag.aligned == RIGHT)
-	{
-  		while (prtlen < tag.width - total_addrlen)
-  		{
-  			write(1, " ", 1);
-  			++prtlen;
-  		}
-	}
-	//prints significant addr numbers
-	temp = -1;
+		prtlen += iter_write(' ', tag.width - total_addrlen);
 	if (tag.zero_flag == FALSE)
 	{
 		write(1, "0x", 2);
 		prtlen += 2;
 	}
-	while ((signed int)(++temp) < tag.precision - sig_addrlen)
-	{
-		write(1, "0", 1);
-		++prtlen;
-	}
+	prtlen += iter_write('0', tag.precision - sig_addrlen);
 	if (sig_addrlen)
 		ft_putnbr_base(addr, "0123456789abcdef", 16);
 	prtlen += sig_addrlen;
 	if (tag.aligned == LEFT)
-	{
-		while (prtlen < tag.width)
-		{
-			write(1, " ", 1);
-			++prtlen;
-		}
-	}
+		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
 }

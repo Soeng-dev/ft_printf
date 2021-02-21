@@ -18,30 +18,12 @@ int		prt_pct(t_tag tag)
 
 	prtlen = 0;
 	if (tag.zero_flag)
-	{
-		while (prtlen < tag.width - 1)
-  		{
-  			write(1, "0", 1);
-  			++prtlen;
-  		}
-  	}
+		prtlen += iter_write('0', tag.width - 1);
 	else if (tag.aligned == RIGHT)
-	{
-  		while (prtlen < tag.width - 1)
-  		{
-  			write(1, " ", 1);
-  			++prtlen;
-  		}
-	}
+		prtlen += iter_write(' ', tag.width - 1);
 	ft_putchar_fd('%', 1);
 	++prtlen;
 	if (tag.aligned == LEFT)
-	{
-		while (prtlen < tag.width)
-		{
-			write(1, " ", 1);
-			++prtlen;
-		}
-	}
+		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
 }

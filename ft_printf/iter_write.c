@@ -14,10 +14,13 @@
 
 int	iter_write(char c, int iter)
 {
-	int writelen;
+	int prtlen;
 
-	writelen = -1;
-	while (++writelen < iter)
+	prtlen = -1;
+	while (++prtlen < iter)
 		write(1, &c, 1);
-	return (writelen);
+	if (prtlen >= 0)
+		return (prtlen);
+	else
+		return (0);
 }

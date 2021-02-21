@@ -56,53 +56,24 @@ int		prt_int(va_list param, t_tag tag)
 		++digitlen;
 	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	prtlen = 0;
-	//from here print starts
-	//first condition states print before significant digit numbers 
 	if (tag.zero_flag)
 	{
 		if (i < 0)
-  		{
- 			write(1, "-", 1);
-			++prtlen;
-  		}
-		while (prtlen < tag.width - digitlen)
-  		{
-  			write(1, "0", 1);
-  			++prtlen;
-  		}
+  			prtlen += iter_write('-', 1);
+		prtlen += iter_write('0', tag.width - digitlen);
   	}
+
 	else if (tag.aligned == RIGHT)
-	{
-  		while (prtlen < tag.width - total_intlen)
-  		{
-  			write(1, " ", 1);
-  			++prtlen;
-  		}
-	}
+		prtlen += iter_write(' ', tag.width - total_intlen);
 	if (i < 0 && tag.zero_flag == FALSE)
-	{
-		write(1, "-", 1);
-		++prtlen;
-	}
-	//prints significant digit numbers
-	temp = -1;
-	while (++temp < tag.precision - digitlen)
-	{
-		write(1, "0", 1);
-		++prtlen;
-	}
+		prtlen += iter_write('-', 1);
+	prtlen += iter_write('0', tag.precision - digitlen);
 	temp = (i < 0) ? -i : i;
 	if (digitlen)
 		ft_putnbr_fd(temp, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
-	{
-		while (prtlen < tag.width)
-		{
-			write(1, " ", 1);
-			++prtlen;
-		}
-	}
+		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
 }
 
@@ -136,41 +107,15 @@ int		prt_uint(va_list param, t_tag tag)
 		++digitlen;
 	total_intlen = get_total_intlen(digitlen, 1, tag);
 	prtlen = 0;
-	//from here print starts
-	//first condition states print before significant digit numbers 
 	if (tag.zero_flag)
-	{
-		while (prtlen < tag.width - digitlen)
-  		{
-  			write(1, "0", 1);
-  			++prtlen;
-  		}
-  	}
+		prtlen += iter_write('0', tag.width - digitlen);
 	else if (tag.aligned == RIGHT)
-	{
-  		while (prtlen < tag.width - total_intlen)
-  		{
-  			write(1, " ", 1);
-  			++prtlen;
-  		}
-	}
-	//prints significant digit numbers
-	temp = -1;
-	while ((signed int)(++temp) < tag.precision - digitlen)
-	{
-		write(1, "0", 1);
-		++prtlen;
-	}
+		prtlen += iter_write(' ', tag.width - total_intlen);
+	prtlen += iter_write('0', tag.precision - digitlen);
 	if (digitlen)
  		ft_putuint_fd(i, 1);
 	prtlen += digitlen;
 	if (tag.aligned == LEFT)
-	{
-		while (prtlen < tag.width)
-		{
-			write(1, " ", 1);
-			++prtlen;
-		}
-	}
+		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
 }
