@@ -60,7 +60,7 @@ int		prt_int(va_list param, t_tag tag)
 	{
 		if (i < 0)
   			prtlen += iter_write('-', 1);
-		prtlen += iter_write('0', tag.width - digitlen);
+		prtlen += iter_write('0', tag.width - digitlen - prtlen);
   	}
 
 	else if (tag.aligned == RIGHT)
