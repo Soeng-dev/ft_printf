@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_intarg.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soekim <soekim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/22 15:43:41 by soekim            #+#    #+#             */
+/*   Updated: 2021/02/22 15:49:48 by soekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -18,4 +29,3 @@ long long int	get_intarg(va_list param, int memlen)
 		i = (long long int)((char)va_arg(param, unsigned int));
 	return (i);
 }
-

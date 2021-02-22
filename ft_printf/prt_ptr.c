@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:52:26 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/21 21:40:44 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 16:03:11 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		get_total_addrlen(int sig_addrlen, t_tag tag)
 	return (total_addrlen);
 }
 
-int	prt_addr(unsigned long long addr, t_tag tag\
-		, int total_addrlen, int sig_addrlen)
+int		prt_addr(unsigned long long addr, t_tag tag,\
+					int total_addrlen, int sig_addrlen)
 {
 	int		prtlen;
 
