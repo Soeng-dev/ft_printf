@@ -21,26 +21,10 @@ int		get_total_addrlen(int sig_addrlen, t_tag tag)
 		total_addrlen = ftmax(tag.width, total_addrlen);
 	return (total_addrlen);
 }
-
-int		prt_ptr(va_list param, t_tag tag)
+int	prt_addr(unsigned long long addr, int total_addrlen, int sig_addrlen, t_tag tag)
 {
-	unsigned long long	addr;
-	unsigned long long	temp;
-	int					prtlen;
-	int					total_addrlen;
-	int					sig_addrlen;
+	int prtlen;
 
-	addr = (unsigned long long)va_arg(param, void *);
-	temp = addr;
-	sig_addrlen = 0;
-	while (temp > 0)
-	{
-		temp /= 16;
-		++sig_addrlen;
-	}
-	if (tag.precision == UNSET && sig_addrlen == 0)
-		++sig_addrlen;
-	total_addrlen = get_total_addrlen(sig_addrlen, tag);
 	prtlen = 0;
 	if (tag.zero_flag)
 	{
@@ -62,4 +46,25 @@ int		prt_ptr(va_list param, t_tag tag)
 	if (tag.aligned == LEFT)
 		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
+}
+
+int		prt_ptr(va_list param, t_tag tag)
+{
+	unsigned long long	addr;
+	unsigned long long	temp;
+	int					total_addrlen;
+	int					sig_addrlen;
+
+	addr = (unsigned long long)va_arg(param, void *);
+	temp = addr;
+	sig_addrlen = 0;
+	while (temp > 0)
+	{
+		temp /= 16;
+		++sig_addrlen;
+	}
+	if (tag.precision == UNSET && sig_addrlen == 0)
+		++sig_addrlen;
+	total_addrlen = get_total_addrlen(sig_addrlen, tag);
+	return (prt_addr(addr, total_addrlen, sig_addrlen, tag));
 }

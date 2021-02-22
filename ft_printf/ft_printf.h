@@ -51,5 +51,7 @@ int		iter_write(char c, int iter);
 void	ft_putuint_fd(unsigned long long n, int fd);
 int		ft_putnbr_base(unsigned long long n, char *base,\
 		unsigned long long base_size);
+unsigned long long	get_uintarg(va_list param, int memlen);
+long long int		get_intarg(va_list param, int memlen);
 int		ft_printf(const char *format, ...);
 #endif

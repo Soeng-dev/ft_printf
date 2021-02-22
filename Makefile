@@ -14,7 +14,9 @@ SRC = ./ft_printf/ft_printf.c		\
 	  ./ft_printf/prt_pct.c			\
 	  ./ft_printf/iter_write.c		\
 	  ./ft_printf/ftmin.c			\
-	  ./ft_printf/ftmax.c
+	  ./ft_printf/ftmax.c			\
+	  ./ft_printf/get_uintarg.c		\
+	  ./ft_printf/get_intarg.c
 		
 OBJ = $(SRC:.c=.o)
 

@@ -14,7 +14,7 @@
 
 /* only defined flag priority (indicated by gcc compiler)
  * considered in tag managing part
- * others at conversion part (for extensibility of flag condition)*/
+ * others at conversion part (for extensibility of flag condition) */
 
 int		get_width(const char **spec)
 {

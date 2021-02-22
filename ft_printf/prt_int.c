@@ -24,37 +24,11 @@ int		get_total_intlen(int digitlen, int sign, t_tag tag)
 	return (total_intlen);
 }
 
-int		prt_int(va_list param, t_tag tag)
+int		prt_convint(long long int i, t_tag tag, int digitlen, int total_intlen)
 {
-	long long int	i;
-	long long int	temp;
-	int				prtlen;
-	int				total_intlen;
-	int				digitlen;
+	int	prtlen;
+	int	temp;
 
-	i = 0;
-	if (tag.memlen == 0)
-		i = (long long int)va_arg(param, int);
-	else if (tag.memlen == L)
-		i = (long long int)va_arg(param, long int);
-	else if (tag.memlen == LL)
-		i = (long long int)va_arg(param, long long int);
-	else if (tag.memlen == H)
-		i = (long long int)((short)va_arg(param, int));
-	else if (tag.memlen == HH)
-		i = (long long int)((char)va_arg(param, int));
-	temp = (i < 0) ? -i : i;
-	digitlen = 0;
-	while (temp > 0)
-	{
-		temp /= 10;
-		++digitlen;
-	}
-	if (tag.precision != UNSET)
-		tag.zero_flag = FALSE;
-	if (tag.precision == UNSET && digitlen == 0)
-		++digitlen;
-	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	prtlen = 0;
 	if (tag.zero_flag)
 	{
@@ -76,35 +50,32 @@ int		prt_int(va_list param, t_tag tag)
 	return (prtlen);
 }
 
-int		prt_uint(va_list param, t_tag tag)
+int		prt_int(va_list param, t_tag tag)
 {
-	unsigned long long	i;
-	unsigned long long	temp;
-	int					prtlen;
-	int					total_intlen;
-	int					digitlen;
+	long long int	i;
+	long long int	temp;
+	int				total_intlen;
+	int				digitlen;
 
-	i = 0;
-	if (tag.memlen == 0)
-		i = (unsigned long long)va_arg(param, unsigned int);
-	else if (tag.memlen == L)
-		i = (unsigned long long)va_arg(param, unsigned long);
-	else if (tag.memlen == LL)
-		i = (unsigned long long)va_arg(param, unsigned long long);
-	else if (tag.memlen == H)
-		i = (unsigned long long)(va_arg(param, unsigned int) & (0xffff));
-	else if (tag.memlen == HH)
-		i = (unsigned long long)(va_arg(param, unsigned int) & (0xff));
-	temp = i;
+	i = get_intarg(param, tag.memlen);
+	temp = (i < 0) ? -i : i;
 	digitlen = 0;
 	while (temp > 0)
 	{
 		temp /= 10;
 		++digitlen;
 	}
+	if (tag.precision != UNSET)
+		tag.zero_flag = FALSE;
 	if (tag.precision == UNSET && digitlen == 0)
 		++digitlen;
-	total_intlen = get_total_intlen(digitlen, 1, tag);
+	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
+	return (prt_convint(i, tag, digitlen, total_intlen));
+}
+int		prt_convuint(unsigned long long i, t_tag tag, int digitlen, int total_intlen)
+{
+	int prtlen;
+
 	prtlen = 0;
 	if (tag.zero_flag)
 		prtlen += iter_write('0', tag.width - digitlen);
@@ -117,4 +88,25 @@ int		prt_uint(va_list param, t_tag tag)
 	if (tag.aligned == LEFT)
 		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
+}
+
+int		prt_uint(va_list param, t_tag tag)
+{
+	unsigned long long	i;
+	unsigned long long	temp;
+	int					total_intlen;
+	int					digitlen;
+
+	i = get_uintarg(param, tag.memlen);
+	temp = i;
+	digitlen = 0;
+	while (temp > 0)
+	{
+		temp /= 10;
+		++digitlen;
+	}
+	if (tag.precision == UNSET && digitlen == 0)
+		++digitlen;
+	total_intlen = get_total_intlen(digitlen, 1, tag);
+	return (prt_convuint(i, tag, digitlen, total_intlen));
 }
