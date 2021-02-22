@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:41:50 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/21 21:55:20 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 13:26:09 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	align_left(t_tag *tag)
 
 void	init_tag(t_tag *tag)
 {
-	ft_memset((void*)tag, 0, sizeof(tag));
+	ft_memset((void*)tag, 0, sizeof(t_tag));
 	tag->precision = UNSET;
 }
 
@@ -180,3 +180,8 @@ int		ft_printf(const char *format, ...)
 	va_end(param);
 	return (prtlen);
 }
+//
+//int main()
+//{
+//	ft_printf(IP);
+//}
