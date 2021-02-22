@@ -61,11 +61,11 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 				+ iter_write('0', tag.width - sig_digitlen));
 	else if (tag.aligned == RIGHT)
 		prtlen += iter_write(' ', tag.width - total_hexalen);
-	if (tag.zero_flag == FALSE)
+	if (tag.zero_flag == FALSE && tag.prefix == '#')
 		prtlen += ft_putstr_fd((is_capital) ? "0X" : "0x", 1);
 	prtlen += iter_write('0', tag.precision - sig_digitlen);
 	if (sig_digitlen)
-		prtlen += prt_sighexa(is_capital, sig_digitlen);
+		prtlen += prt_sighexa(i, is_capital);
 	if (tag.aligned == LEFT)
 		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
