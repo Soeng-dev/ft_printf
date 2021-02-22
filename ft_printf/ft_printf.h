@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 20:06:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/22 17:39:29 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 19:17:57 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int					ft_putnbr_base(unsigned long long n, char *base,\
 unsigned long long	get_uintarg(va_list param, int memlen);
 long long int		get_intarg(va_list param, int memlen);
 int					ft_printf(const char *format, ...);
-int		get_width(const char **spec);
-int		get_precision(const char **spec, va_list param);
-void	get_widtharg(va_list param, t_tag *tag);
-int		get_memlen(const char **spec, int memlen);
-void	align_left(t_tag *tag);
+int					get_width(const char **spec);
+int					get_precision(const char **spec, va_list param);
+void				get_widtharg(va_list param, t_tag *tag);
+int					get_memlen(const char **spec, int memlen);
+void				align_left(t_tag *tag);
 #endif

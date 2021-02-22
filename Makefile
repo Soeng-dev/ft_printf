@@ -17,8 +17,8 @@ SRC = ./ft_printf/ft_printf.c		\
 	  ./ft_printf/ftmax.c			\
 	  ./ft_printf/get_uintarg.c		\
 	  ./ft_printf/get_intarg.c		\
-	  ./ft_printf/manage_tag.c
-		
+	  ./ft_printf/manage_tag.c		\
+	  ./ft_printf/prt_uint.c
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

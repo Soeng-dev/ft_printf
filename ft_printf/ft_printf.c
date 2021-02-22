@@ -6,15 +6,17 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:41:50 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/22 17:34:19 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 19:39:40 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** only defined flag priority (indicated by gcc compiler) considered in tag managing part
-** others at conversion part (for extensibility of flag condition)
+** For extensibility of flag managing,
+** get_tag function considered only
+** defined flag priority (indicated by compiler considered)
+** others at cvt_and_prt functions
 */
 
 void	init_tag(t_tag *tag)
@@ -43,9 +45,7 @@ t_tag	get_tag(const char **spec, va_list param)
 		else if (**spec == 'l' || **spec == 'h')
 			tag.memlen = get_memlen(spec, tag.memlen);
 		else if (**spec == ' ')
-			tag.sign_flag = ' ';
-		else if (**spec == '+' && tag.sign_flag != ' ')
-			tag.sign_flag = '+';
+			tag.sign_flag = (tag.sign_flag == ' ') ? (' ') : (**spec);
 		else if (**spec == '#')
 			tag.prefix = TRUE;
 		else

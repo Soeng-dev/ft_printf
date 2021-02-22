@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:53:39 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/22 17:24:28 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 19:17:27 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		prt_sighexa(unsigned long long i, int is_capital)
 {
 	if (is_capital)
 		return (ft_putnbr_base(i, "0123456789ABCDEF", 16));
-	else 
+	else
 		return (ft_putnbr_base(i, "0123456789abcdef", 16));
 }
 
@@ -63,7 +63,6 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 		prtlen += iter_write(' ', tag.width - total_hexalen);
 	if (tag.zero_flag == FALSE)
 		prtlen += ft_putstr_fd((is_capital) ? "0X" : "0x", 1);
-	
 	prtlen += iter_write('0', tag.precision - sig_digitlen);
 	if (sig_digitlen)
 		prtlen += prt_sighexa(is_capital, sig_digitlen);
