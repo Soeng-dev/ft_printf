@@ -68,5 +68,5 @@ int		prt_ptr(va_list param, t_tag tag)
 	if (tag.precision == UNSET && sig_addrlen == 0)
 		++sig_addrlen;
 	total_addrlen = get_total_addrlen(sig_addrlen, tag);
-	return (prt_addr(addr, total_addrlen, sig_addrlen, tag));
+	return (prt_addr(addr, tag, total_addrlen, sig_addrlen));
 }
