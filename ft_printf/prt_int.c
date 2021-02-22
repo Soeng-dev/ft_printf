@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:54:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/22 19:43:08 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 19:49:59 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int		prt_sign(long long int i, int sign_flag)
 {
 	if (i < 0)
 		return (iter_write('-', 1));
-	else if (tag.sign_flag)
-		return (iter_write(tag.sign_flag, 1));
+	else if (sign_flag)
+		return (iter_write(sign_flag, 1));
+	else
+		return (0);
 }
 
 int		prt_convint(long long int i, t_tag tag, int digitlen, int total_intlen)
