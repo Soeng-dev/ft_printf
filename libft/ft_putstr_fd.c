@@ -18,7 +18,7 @@ int	ft_putstr_fd(char *s, int fd)
 
 	len = 0;
 	if (!s)
-		return (0);
+		return (IS_NULL);
 	while (*s)
 	{
 		write(fd, s, 1);

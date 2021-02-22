@@ -34,12 +34,19 @@ int		prt_convint(long long int i, t_tag tag, int digitlen, int total_intlen)
 	{
 		if (i < 0)
 			prtlen += iter_write('-', 1);
+		else if (tag.sign_flag)
+			prtlen += iter_write(tag.sign_flag, 1);
 		prtlen += iter_write('0', tag.width - digitlen - prtlen);
 	}
 	else if (tag.aligned == RIGHT)
 		prtlen += iter_write(' ', tag.width - total_intlen);
-	if (i < 0 && tag.zero_flag == FALSE)
-		prtlen += iter_write('-', 1);
+	if (tag.zero_flag == FALSE)
+	{
+		if (i < 0)
+			prtlen += iter_write('-', 1);
+		else if (tag.sign_flag)
+			prtlen += iter_write(tag.sign_flag, 1);
+	}
 	prtlen += iter_write('0', tag.precision - digitlen);
 	temp = (i < 0) ? -i : i;
 	if (digitlen)

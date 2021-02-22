@@ -13,8 +13,7 @@
 #include "ft_printf.h"
 
 /*
-** only defined flag priority (indicated by gcc compiler)
-** considered in tag managing part
+** only defined flag priority (indicated by gcc compiler) considered in tag managing part
 ** others at conversion part (for extensibility of flag condition)
 */
 
@@ -47,6 +46,8 @@ t_tag	get_tag(const char **spec, va_list param)
 			tag.sign_flag = ' ';
 		else if (**spec == '+' && tag.sign_flag != ' ')
 			tag.sign_flag = '+';
+		else if (**spec == '#')
+			tag.prefix = TRUE;
 		else
 			break ;
 	}

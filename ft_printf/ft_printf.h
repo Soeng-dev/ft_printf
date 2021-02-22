@@ -36,6 +36,7 @@ struct				s_tag
 	int		width;
 	int		memlen;
 	int		sign_flag;
+	int		prefix;
 };
 typedef struct s_tag	t_tag;
 int					ftmax(int a, int b);

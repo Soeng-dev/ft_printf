@@ -37,6 +37,14 @@ int		get_sig_digitlen(unsigned long long i, int precision)
 	return (sig_digitlen);
 }
 
+int		prt_sighexa(unsigned long long i, int is_capital)
+{
+	if (is_capital)
+		return (ft_putnbr_base(i, "0123456789ABCDEF", 16));
+	else 
+		return (ft_putnbr_base(i, "0123456789abcdef", 16));
+}
+
 int		prt_hexa(va_list param, t_tag tag, int is_capital)
 {
 	unsigned long long	i;
@@ -49,14 +57,16 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 	sig_digitlen = get_sig_digitlen(i, tag.precision);
 	total_hexalen = get_total_hexalen(sig_digitlen, tag);
 	if (tag.zero_flag)
-		prtlen += iter_write('0', tag.width - sig_digitlen);
+		prtlen += (ft_putstr_fd((is_capital) ? "0X" : "0x", 1) \
+				+ iter_write('0', tag.width - sig_digitlen));
 	else if (tag.aligned == RIGHT)
 		prtlen += iter_write(' ', tag.width - total_hexalen);
+	if (tag.zero_flag == FALSE)
+		prtlen += ft_putstr_fd((is_capital) ? "0X" : "0x", 1);
+	
 	prtlen += iter_write('0', tag.precision - sig_digitlen);
-	if (is_capital && sig_digitlen)
-		prtlen += ft_putnbr_base(i, "0123456789ABCDEF", 16);
-	else if (is_capital == FALSE && sig_digitlen)
-		prtlen += ft_putnbr_base(i, "0123456789abcdef", 16);
+	if (sig_digitlen)
+		prtlen += prt_sighexa(is_capital, sig_digitlen);
 	if (tag.aligned == LEFT)
 		prtlen += iter_write(' ', tag.width - prtlen);
 	return (prtlen);
