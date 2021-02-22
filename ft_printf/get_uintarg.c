@@ -17,5 +17,4 @@ unsigned long long	get_uintarg(va_list param, int memlen)
 	else if (memlen == HH)
 		i = (unsigned long long)(va_arg(param, unsigned int) & (0xff));
 	return (i);
-
 }

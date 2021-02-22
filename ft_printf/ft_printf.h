@@ -38,19 +38,19 @@ struct	s_tag
 	int		sign_flag;
 };
 typedef struct s_tag	t_tag;
-int		ftmax(int a, int b);
-int		ftmin(int a, int b);
-int		prt_int(va_list param, t_tag tag);
-int		prt_uint(va_list param, t_tag tag);
-int		prt_str(va_list param, t_tag tag);
-int		prt_char(va_list param, t_tag tag);
-int		prt_hexa(va_list param, t_tag tag, int is_capital);
-int		prt_ptr(va_list param, t_tag tag);
-int		prt_pct(t_tag tag);
-int		iter_write(char c, int iter);
+int			ftmax(int a, int b);
+int			ftmin(int a, int b);
+int			prt_int(va_list param, t_tag tag);
+int			prt_uint(va_list param, t_tag tag);
+int			prt_str(va_list param, t_tag tag);
+int			prt_char(va_list param, t_tag tag);
+int			prt_hexa(va_list param, t_tag tag, int is_capital);
+int			prt_ptr(va_list param, t_tag tag);
+int			prt_pct(t_tag tag);
+int			iter_write(char c, int iter);
 void	ft_putuint_fd(unsigned long long n, int fd);
-int		ft_putnbr_base(unsigned long long n, char *base,\
-		unsigned long long base_size);
+int			ft_putnbr_base(unsigned long long n, char *base,\
+					unsigned long long base_size);
 unsigned long long	get_uintarg(va_list param, int memlen);
 long long int		get_intarg(va_list param, int memlen);
 int		ft_printf(const char *format, ...);

@@ -14,16 +14,18 @@
 
 int		get_total_addrlen(int sig_addrlen, t_tag tag)
 {
-	int	total_addrlen;
+	int		total_addrlen;
 
 	total_addrlen = ftmax(tag.precision, 2 + sig_addrlen);
 	if (tag.zero_flag)
 		total_addrlen = ftmax(tag.width, total_addrlen);
 	return (total_addrlen);
 }
-int	prt_addr(unsigned long long addr, int total_addrlen, int sig_addrlen, t_tag tag)
+
+int	prt_addr(unsigned long long addr, t_tag tag\
+		, int total_addrlen, int sig_addrlen)
 {
-	int prtlen;
+	int		prtlen;
 
 	prtlen = 0;
 	if (tag.zero_flag)

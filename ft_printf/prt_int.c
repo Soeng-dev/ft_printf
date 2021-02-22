@@ -72,7 +72,9 @@ int		prt_int(va_list param, t_tag tag)
 	total_intlen = get_total_intlen(digitlen, (i >= 0) ? (1) : (-1), tag);
 	return (prt_convint(i, tag, digitlen, total_intlen));
 }
-int		prt_convuint(unsigned long long i, t_tag tag, int digitlen, int total_intlen)
+
+int		prt_convuint(unsigned long long i, t_tag tag,\
+				int digitlen, int total_intlen)
 {
 	int prtlen;
 

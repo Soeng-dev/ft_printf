@@ -24,7 +24,7 @@ int		get_total_hexalen(int sig_digitlen, t_tag tag)
 
 int		prt_alignchar(t_tag tag, int total_hexalen, int sig_digitlen)
 {
-	int prtlen;
+	int	prtlen;
 
 	prtlen = 0;
 	if (tag.zero_flag)
@@ -41,10 +41,11 @@ int		prt_hexa(va_list param, t_tag tag, int is_capital)
 	unsigned long long	i;
 	unsigned long long	temp;
 	int			prtlen;
-	int					total_hexalen;
-	int					sig_digitlen;
+	int			total_hexalen;
+	int			sig_digitlen;
 
-	sig_digitlen = (prtlen = 0);
+	prtlen = 0;
+	sig_digitlen = 0;
 	temp = (i = get_uintarg(param, tag.memlen));
 	while (temp > 0)
 	{
