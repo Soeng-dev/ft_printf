@@ -6,10 +6,10 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:41:50 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/22 21:28:57 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:58:54 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h> //test
+
 #include "ft_printf.h"
 
 /*
@@ -115,8 +115,3 @@ int		ft_printf(const char *format, ...)
 	va_end(param);
 	return (prtlen);
 }
-//
-//int main()
-//{
-//	printf(IP);
-//}
