@@ -6,10 +6,10 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:41:50 by soekim            #+#    #+#             */
-/*   Updated: 2021/02/22 21:02:32 by soekim           ###   ########.fr       */
+/*   Updated: 2021/02/22 21:28:57 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h> //test
 #include "ft_printf.h"
 
 /*
@@ -74,8 +74,8 @@ int		cvt_and_prt(const char **spec, va_list param, t_tag tag)
 		return (prt_hexa(param, tag, TRUE));
 	else if (**spec == 'x')
 		return (prt_hexa(param, tag, FALSE));
-	else
-		return (0);
+	--(*spec);
+	return (0);
 }
 
 int		cvt_fmtspec(const char **spec, va_list param, int prtlen)
@@ -115,3 +115,8 @@ int		ft_printf(const char *format, ...)
 	va_end(param);
 	return (prtlen);
 }
+//
+//int main()
+//{
+//	printf(IP);
+//}
